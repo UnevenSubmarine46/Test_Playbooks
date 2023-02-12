@@ -1,0 +1,12 @@
+---
+- name: Install nginx
+  hosts: all
+  become: yes
+  vars:
+    source_file: /home/nikita/ansible/trash/index.nginx-debian.html
+    dest_file: /var/www/html
+  tasks:
+    - name: Copy source page to hosts
+      copy: src={{ source_file }}  dest={{ dest_file }}
+    - name: Reload Nginx
+      service: name=nginx  state=restarted
